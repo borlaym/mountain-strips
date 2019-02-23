@@ -3,11 +3,28 @@ import './App.css';
 import { MountainStrip } from './types';
 import MountainStripComponent from './MountainStrip';
 import createStripDeck from './createStripDeck';
+import styled from 'styled-components';
 
 interface State {
 	stripDeck: MountainStrip[],
 	activeStrips: MountainStrip[]
 }
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+`
+
+const Button = styled.button`
+	display: flex;
+	margin: 15px;
+	padding: 15px;
+	text-align: center;
+	background: green;
+	color: white;
+`
 
 class App extends React.Component<{}, State> {
 	public state: State = {
@@ -23,10 +40,10 @@ class App extends React.Component<{}, State> {
 	}
 	render() {
 		return (
-			<div>
+			<Container>
 				{this.state.activeStrips.map(strip => <MountainStripComponent strip={strip} />)}
-				<button onClick={this.newGame}>New Game</button>
-			</div>
+				<Button onClick={this.newGame}>New Game</Button>
+			</Container>
 		)
 	}
 }

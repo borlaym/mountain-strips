@@ -43,6 +43,8 @@ const Strip = styled.div`
 	align-items: center;
 	justify-content: center;
 	transition: all 1s;
+	max-width: 800px;
+	align-self: center;
 
 	${(props: { removed: boolean }) => props.removed && `
 		img {
@@ -55,6 +57,10 @@ const Strip = styled.div`
 const Good = styled.img`
 	opacity: ${(props: { taken: boolean }) => props.taken ? '0.3' : '1'};
 	transition: all 0.8s;
+	max-width: 45px;
+	@media screen and (max-width: 359px) {
+		max-width: 40px;
+	}
 `
 
 export default function MountainStripComponent(props: Props) {

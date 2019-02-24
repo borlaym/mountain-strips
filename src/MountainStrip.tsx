@@ -2,6 +2,12 @@ import * as React from 'react';
 import { MountainStrip, Goods } from "./types";
 import styled from "styled-components";
 import SwipeActions from './SwipeActions';
+import wood from './images/wood.png';
+import stone from './images/stone.png';
+import ore from './images/ore.png';
+import silvers from './images/silvers.png';
+import silver from './images/silver.png';
+import strip from './images/strip.png';
 
 interface Props {
 	strip: MountainStrip,
@@ -12,22 +18,22 @@ interface Props {
 function goodToImageSrc(good: Goods): string {
 	switch(good) {
 		case Goods.Wood:
-			return '/wood.png'
+			return wood
 		case Goods.Stone:
-			return '/stone.png'
+			return stone
 		case Goods.Ore:
-			return '/ore.png'
+			return ore
 		case Goods.DoubleSilver:
-			return '/silvers.png'
+			return silvers
 		case Goods.Silver:
-			return '/silver.png'
+			return silver
 	}
 }
 
 const Strip = styled.div`
 	/* margin-bottom: 15px; */
 	height: ${(props: { removed: boolean }) => props.removed ? '0px' : '80px'};
-	background: url('/strip.png');
+	background: url(${strip});
 	background-size: fixed;
 	display: flex;
 	width: 100%;

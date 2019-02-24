@@ -1,13 +1,14 @@
 {
   "main.css": "/mountain-strips/static/css/main.89273a61.chunk.css",
-  "main.js": "/mountain-strips/static/js/main.228dfeb8.chunk.js",
-  "main.js.map": "/mountain-strips/static/js/main.228dfeb8.chunk.js.map",
+  "main.js": "/mountain-strips/static/js/main.8ad26e15.chunk.js",
+  "main.js.map": "/mountain-strips/static/js/main.8ad26e15.chunk.js.map",
   "runtime~main.js": "/mountain-strips/static/js/runtime~main.c12d38a0.js",
   "runtime~main.js.map": "/mountain-strips/static/js/runtime~main.c12d38a0.js.map",
-  "static/js/2.4b8e844f.chunk.js": "/mountain-strips/static/js/2.4b8e844f.chunk.js",
-  "static/js/2.4b8e844f.chunk.js.map": "/mountain-strips/static/js/2.4b8e844f.chunk.js.map",
+  "static/js/2.4f397afb.chunk.js": "/mountain-strips/static/js/2.4f397afb.chunk.js",
+  "static/js/2.4f397afb.chunk.js.map": "/mountain-strips/static/js/2.4f397afb.chunk.js.map",
   "index.html": "/mountain-strips/index.html",
-  "precache-manifest.c2bba63acc4af2e82d10eac769f77e91.js": "/mountain-strips/precache-manifest.c2bba63acc4af2e82d10eac769f77e91.js",
+  "precache-manifest.33afd4730c5420d90a359ae6100c362e.js": "/mountain-strips/precache-manifest.33afd4730c5420d90a359ae6100c362e.js",
   "service-worker.js": "/mountain-strips/service-worker.js",
-  "static/css/main.89273a61.chunk.css.map": "/mountain-strips/static/css/main.89273a61.chunk.css.map"
+  "static/css/main.89273a61.chunk.css.map": "/mountain-strips/static/css/main.89273a61.chunk.css.map",
+  "static/media/strip.png": "/mountain-strips/static/media/strip.45112c8a.png"
 }

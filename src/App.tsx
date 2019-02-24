@@ -10,6 +10,11 @@ enum View {
 	Settings
 }
 
+enum PlayerCount {
+	OneToThree,
+	Four
+}
+
 interface State {
 	stripDeck: MountainStrip[],
 	activeStrips: MountainStrip[],
@@ -41,6 +46,13 @@ const Button = styled.button`
 const Link = styled.a`
 	color: #222222;
 	padding: 30px;
+`
+
+const NewGameContainer =  styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
 `
 
 const Option = styled.div`
@@ -75,13 +87,27 @@ class App extends React.Component<{}, State> {
 		view: View.Main,
 		settings: NorwegianStrip.DontUse
 	}
-	private newGame = () => {
+	private newGame = (playerCount: PlayerCount) => {
 		const stripDeck = createStripDeck(this.state.settings);
-		const [strip1, strip2, ...rest] = stripDeck
-		this.setState({
-			activeStrips: [strip1, strip2],
-			stripDeck: rest
-		})
+		switch (playerCount) {
+			case PlayerCount.OneToThree: {
+				const [strip1, strip2, ...rest] = stripDeck
+				this.setState({
+					activeStrips: [strip1, strip2],
+					stripDeck: rest
+				})
+				return
+			}
+			case PlayerCount.Four: {
+				const [strip1, strip2, strip3, ...rest] = stripDeck
+				this.setState({
+					activeStrips: [strip1, strip2, strip3],
+					stripDeck: rest
+				})
+				return
+			}
+
+		}
 	}
 	componentDidUpdate() {
 		window.localStorage.setItem('state', JSON.stringify(this.state))
@@ -175,7 +201,10 @@ class App extends React.Component<{}, State> {
 					/>
 				))}
 				{this.state.stripDeck.length > 0 && <Button onClick={this.nextTurn}>End of Turn</Button>}
-				<Link onClick={this.newGame}>New Game</Link>
+				<NewGameContainer>
+					<Link onClick={() => this.newGame(PlayerCount.OneToThree)}>New Game</Link>
+					<Link onClick={() => this.newGame(PlayerCount.Four)}>New 4p Game</Link>
+				</NewGameContainer>
 				<Link onClick={this.showSettings}>Settings</Link>
 			</Container>
 		)

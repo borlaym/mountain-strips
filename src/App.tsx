@@ -40,9 +40,6 @@ class App extends React.Component<{}, State> {
 			stripDeck: rest
 		})
 	}
-	componentDidMount() {
-		this.newGame()
-	}
 	take = (index: number) => {
 		const newTakenNumber = Math.min(this.state.activeStrips[index].layout.length, this.state.activeStrips[index].taken + 1)
 		this.setState({
@@ -82,6 +79,20 @@ class App extends React.Component<{}, State> {
 			activeStrips: newStrip ? updatedStrips.concat(newStrip) : updatedStrips,
 			stripDeck: this.state.stripDeck.slice(1)
 		})
+	}
+	componentDidUpdate() {
+		window.localStorage.setItem('state', JSON.stringify(this.state))
+	}
+	componentDidMount() {
+		const prevState = window.localStorage.getItem('state');
+		if (prevState) {
+			try {
+				const state = JSON.parse(prevState);
+				this.setState(state);
+			} catch (err) {
+				console.error(err)
+			}
+		}
 	}
 	render() {
 		return (

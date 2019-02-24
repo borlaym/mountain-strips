@@ -18,7 +18,7 @@ function goodToImageSrc(good: Goods): string {
 		case Goods.Ore:
 			return '/ore.png'
 		case Goods.DoubleSilver:
-			return '/coins.png'
+			return '/silvers.png'
 		case Goods.Silver:
 			return '/silver.png'
 	}
@@ -44,7 +44,7 @@ export default function MountainStripComponent(props: Props) {
 		<SwipeActions onLeftAction={props.onUndoAction} onRightAction={props.onTakeAction}>
 			<Strip>
 				{props.strip.layout.map((good, index) => (
-					<Good src={goodToImageSrc(good)} taken={props.strip.taken > index} />
+					<Good key={index} src={goodToImageSrc(good)} taken={props.strip.taken > index} />
 				))}
 			</Strip>
 		</SwipeActions>

@@ -33,7 +33,8 @@ class App extends React.Component<{}, State> {
 		activeStrips: []
 	}
 	private newGame = () => {
-		const [strip1, strip2, ...rest] = this.state.stripDeck
+		const stripDeck = createStripDeck();
+		const [strip1, strip2, ...rest] = stripDeck
 		this.setState({
 			activeStrips: [strip1, strip2],
 			stripDeck: rest
@@ -84,6 +85,7 @@ class App extends React.Component<{}, State> {
 			<Container>
 				{this.state.activeStrips.map((strip, index) => (
 					<MountainStripComponent
+						key={strip.layout.join('')}
 						strip={strip}
 						onTakeAction={() => this.take(index)}
 						onUndoAction={() => this.undo(index)}

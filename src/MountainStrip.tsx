@@ -25,14 +25,22 @@ function goodToImageSrc(good: Goods): string {
 }
 
 const Strip = styled.div`
-	margin-bottom: 15px;
-	height: 80px;
+	/* margin-bottom: 15px; */
+	height: ${(props: { removed: boolean }) => props.removed ? '0px' : '80px'};
 	background: url('/strip.png');
-	background-size: cover;
+	background-size: fixed;
 	display: flex;
 	width: 100%;
 	align-items: center;
 	justify-content: center;
+	transition: all 1s;
+
+	${(props: { removed: boolean }) => props.removed && `
+		img {
+			opacity: 0;
+		}
+	`};
+
 `
 
 const Good = styled.img`
@@ -43,7 +51,7 @@ const Good = styled.img`
 export default function MountainStripComponent(props: Props) {
 	return (
 		<SwipeActions onLeftAction={props.onUndoAction} onRightAction={props.onTakeAction}>
-			<Strip>
+			<Strip removed={props.strip.removed}>
 				{props.strip.layout.map((good, index) => (
 					<Good key={index} src={goodToImageSrc(good)} taken={props.strip.taken > index} />
 				))}

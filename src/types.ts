@@ -8,6 +8,7 @@ export enum Goods {
 
 export interface MountainStrip {
 	layout: Goods[],
-	taken: number
+	taken: number,
+	removed: boolean
 }
 

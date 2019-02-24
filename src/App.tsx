@@ -50,7 +50,8 @@ class App extends React.Component<{}, State> {
 				...this.state.activeStrips.slice(0, index),
 				{
 					layout: this.state.activeStrips[index].layout,
-					taken: newTakenNumber
+					taken: newTakenNumber,
+					removed: this.state.activeStrips[index].removed
 				},
 				...this.state.activeStrips.slice(index + 1)
 			]
@@ -63,7 +64,8 @@ class App extends React.Component<{}, State> {
 				...this.state.activeStrips.slice(0, index),
 				{
 					layout: this.state.activeStrips[index].layout,
-					taken: newTakenNumber
+					taken: newTakenNumber,
+					removed: this.state.activeStrips[index].removed
 				},
 				...this.state.activeStrips.slice(index + 1)
 			]
@@ -73,8 +75,9 @@ class App extends React.Component<{}, State> {
 		const newStrip = this.state.stripDeck[0]
 		const updatedStrips = this.state.activeStrips.map(strip => ({
 			layout: strip.layout,
-			taken: Math.min(strip.taken + 1, strip.layout.length)
-		})).filter(strip => strip.taken < strip.layout.length)
+			taken: Math.min(strip.taken + 1, strip.layout.length),
+			removed: Math.min(strip.taken + 1, strip.layout.length) === strip.layout.length
+		}))
 		this.setState({
 			activeStrips: newStrip ? updatedStrips.concat(newStrip) : updatedStrips,
 			stripDeck: this.state.stripDeck.slice(1)

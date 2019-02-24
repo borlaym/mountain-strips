@@ -1,13 +1,13 @@
 {
-  "main.css": "/mountain-strip/static/css/main.89273a61.chunk.css",
-  "main.js": "/mountain-strip/static/js/main.9e435664.chunk.js",
-  "main.js.map": "/mountain-strip/static/js/main.9e435664.chunk.js.map",
-  "runtime~main.js": "/mountain-strip/static/js/runtime~main.81208c0d.js",
-  "runtime~main.js.map": "/mountain-strip/static/js/runtime~main.81208c0d.js.map",
-  "static/js/2.066c14f4.chunk.js": "/mountain-strip/static/js/2.066c14f4.chunk.js",
-  "static/js/2.066c14f4.chunk.js.map": "/mountain-strip/static/js/2.066c14f4.chunk.js.map",
-  "index.html": "/mountain-strip/index.html",
-  "precache-manifest.9db8a024cb7077e1e76184a67d7635a5.js": "/mountain-strip/precache-manifest.9db8a024cb7077e1e76184a67d7635a5.js",
-  "service-worker.js": "/mountain-strip/service-worker.js",
-  "static/css/main.89273a61.chunk.css.map": "/mountain-strip/static/css/main.89273a61.chunk.css.map"
+  "main.css": "/mountain-strips/static/css/main.89273a61.chunk.css",
+  "main.js": "/mountain-strips/static/js/main.228dfeb8.chunk.js",
+  "main.js.map": "/mountain-strips/static/js/main.228dfeb8.chunk.js.map",
+  "runtime~main.js": "/mountain-strips/static/js/runtime~main.c12d38a0.js",
+  "runtime~main.js.map": "/mountain-strips/static/js/runtime~main.c12d38a0.js.map",
+  "static/js/2.4b8e844f.chunk.js": "/mountain-strips/static/js/2.4b8e844f.chunk.js",
+  "static/js/2.4b8e844f.chunk.js.map": "/mountain-strips/static/js/2.4b8e844f.chunk.js.map",
+  "index.html": "/mountain-strips/index.html",
+  "precache-manifest.c2bba63acc4af2e82d10eac769f77e91.js": "/mountain-strips/precache-manifest.c2bba63acc4af2e82d10eac769f77e91.js",
+  "service-worker.js": "/mountain-strips/service-worker.js",
+  "static/css/main.89273a61.chunk.css.map": "/mountain-strips/static/css/main.89273a61.chunk.css.map"
 }

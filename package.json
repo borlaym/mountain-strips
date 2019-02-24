@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://borlaym.github.io/mountain-strip/",
+  "homepage": "http://borlaym.github.io/mountain-strips/",
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -37,7 +37,7 @@ const Strip = styled.div`
 
 const Good = styled.img`
 	opacity: ${(props: { taken: boolean }) => props.taken ? '0.3' : '1'};
-	transition: all 0.5s;
+	transition: all 0.8s;
 `
 
 export default function MountainStripComponent(props: Props) {

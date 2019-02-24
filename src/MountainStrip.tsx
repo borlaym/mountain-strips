@@ -4,7 +4,9 @@ import styled from "styled-components";
 import SwipeActions from './SwipeActions';
 
 interface Props {
-	strip: MountainStrip
+	strip: MountainStrip,
+	onTakeAction: () => void,
+	onUndoAction: () => void
 };
 
 function goodToImageSrc(good: Goods): string {
@@ -34,14 +36,15 @@ const Strip = styled.div`
 `
 
 const Good = styled.img`
+	opacity: ${(props: { taken: boolean }) => props.taken ? '0.3' : '1'};
 `
 
 export default function MountainStripComponent(props: Props) {
 	return (
-		<SwipeActions>
+		<SwipeActions onLeftAction={props.onUndoAction} onRightAction={props.onTakeAction}>
 			<Strip>
-				{props.strip.layout.map(good => (
-					<Good src={goodToImageSrc(good)} />
+				{props.strip.layout.map((good, index) => (
+					<Good src={goodToImageSrc(good)} taken={props.strip.taken > index} />
 				))}
 			</Strip>
 		</SwipeActions>

@@ -3,9 +3,12 @@ import Hammer from 'react-hammerjs'
 import styled from 'styled-components';
 
 const MAX_DRAG_DISTANCE = 100
+const MIN_DISTANCE_FOR_ACTION = 90
 
 interface Props {
-	children: React.ReactNode
+	children: React.ReactNode,
+	onLeftAction: () => void,
+	onRightAction: () => void
 }
 
 interface State {
@@ -50,6 +53,12 @@ export default class SwipeActions extends React.Component<Props, State> {
 	}
 
 	handlePanEnd = (e: HammerInput) => {
+		if (this.state.x < -MIN_DISTANCE_FOR_ACTION) {
+			this.props.onRightAction()
+		}
+		if (this.state.x > MIN_DISTANCE_FOR_ACTION) {
+			this.props.onLeftAction()
+		}
 		this.setState({ x: 0, swiping: false })
 	}
 

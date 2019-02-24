@@ -42,10 +42,43 @@ class App extends React.Component<{}, State> {
 	componentDidMount() {
 		this.newGame()
 	}
+	take = (index: number) => {
+		const newTakenNumber = Math.min(this.state.activeStrips[index].layout.length, this.state.activeStrips[index].taken + 1)
+		this.setState({
+			activeStrips: [
+				...this.state.activeStrips.slice(0, index),
+				{
+					layout: this.state.activeStrips[index].layout,
+					taken: newTakenNumber
+				},
+				...this.state.activeStrips.slice(index + 1)
+			]
+		})
+	}
+	undo = (index: number) => {
+		const newTakenNumber = Math.max(0, this.state.activeStrips[index].taken - 1)
+		this.setState({
+			activeStrips: [
+				...this.state.activeStrips.slice(0, index),
+				{
+					layout: this.state.activeStrips[index].layout,
+					taken: newTakenNumber
+				},
+				...this.state.activeStrips.slice(index + 1)
+			]
+		})
+	}
 	render() {
+		console.log(this.state);
 		return (
 			<Container>
-				{this.state.activeStrips.map(strip => <MountainStripComponent strip={strip} />)}
+				{this.state.activeStrips.map((strip, index) => (
+					<MountainStripComponent
+						strip={strip}
+						onTakeAction={() => this.take(index)}
+						onUndoAction={() => this.undo(index)}
+					/>
+				))}
 				<Button onClick={this.newGame}>New Game</Button>
 			</Container>
 		)

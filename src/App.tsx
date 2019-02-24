@@ -68,8 +68,18 @@ class App extends React.Component<{}, State> {
 			]
 		})
 	}
+	nextTurn = () => {
+		const newStrip = this.state.stripDeck[0]
+		const updatedStrips = this.state.activeStrips.map(strip => ({
+			layout: strip.layout,
+			taken: Math.min(strip.taken + 1, strip.layout.length)
+		})).filter(strip => strip.taken < strip.layout.length)
+		this.setState({
+			activeStrips: newStrip ? updatedStrips.concat(newStrip) : updatedStrips,
+			stripDeck: this.state.stripDeck.slice(1)
+		})
+	}
 	render() {
-		console.log(this.state);
 		return (
 			<Container>
 				{this.state.activeStrips.map((strip, index) => (
@@ -79,6 +89,7 @@ class App extends React.Component<{}, State> {
 						onUndoAction={() => this.undo(index)}
 					/>
 				))}
+				<Button onClick={this.nextTurn}>End of Turn</Button>
 				<Button onClick={this.newGame}>New Game</Button>
 			</Container>
 		)

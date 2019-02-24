@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { MountainStrip, Goods } from "./types";
 import styled from "styled-components";
+import SwipeActions from './SwipeActions';
 
 interface Props {
 	strip: MountainStrip
@@ -37,10 +38,12 @@ const Good = styled.img`
 
 export default function MountainStripComponent(props: Props) {
 	return (
-		<Strip>
-			{props.strip.layout.map(good => (
-				<Good src={goodToImageSrc(good)} />
-			))}
-		</Strip>
+		<SwipeActions>
+			<Strip>
+				{props.strip.layout.map(good => (
+					<Good src={goodToImageSrc(good)} />
+				))}
+			</Strip>
+		</SwipeActions>
 	)
 }

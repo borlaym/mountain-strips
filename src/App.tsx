@@ -38,6 +38,9 @@ class App extends React.Component<{}, State> {
 			stripDeck: rest
 		})
 	}
+	componentDidMount() {
+		this.newGame()
+	}
 	render() {
 		return (
 			<Container>

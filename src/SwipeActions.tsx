@@ -64,7 +64,7 @@ export default class SwipeActions extends React.Component<Props, State> {
 
 	render() {
 		return (
-			<Hammer onPan={this.handlePan} onPanEnd={this.handlePanEnd}>
+			<Hammer onPan={this.handlePan} onPanEnd={this.handlePanEnd} onTap={this.props.onRightAction}>
 				<Container style={{ left: this.state.x + 'px' }} swiping={this.state.swiping}>
 					<Left>
 						Undo

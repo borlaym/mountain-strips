@@ -40,6 +40,7 @@ const Button = styled.button`
 
 const Link = styled.a`
 	color: #222222;
+	padding: 30px;
 `
 
 const Option = styled.div`
@@ -58,7 +59,13 @@ const Option = styled.div`
 
 const OptionSelect = styled.div`
 	margin-top: 30px;
+`
+
+const Info = styled.p`
+	margin: 20px;
+	text-align: center;
 	margin-bottom: 50px;
+
 `
 
 class App extends React.Component<{}, State> {
@@ -147,6 +154,7 @@ class App extends React.Component<{}, State> {
 					<Option selected={this.state.settings === NorwegianStrip.Random} onClick={() => this.setNorwegians(NorwegianStrip.Random)}>Shuffle the Norwegians strip in</Option>
 					<Option selected={this.state.settings === NorwegianStrip.Last} onClick={() => this.setNorwegians(NorwegianStrip.Last)}>The Norwegians strip will always be the last one</Option>
 					<Option selected={this.state.settings === NorwegianStrip.RandomCustom} onClick={() => this.setNorwegians(NorwegianStrip.RandomCustom)}>Shuffle the custom Norwegians strip in as intended by the designer</Option>
+					<Info>Find out more in <a target="_blank" href="https://boardgamegeek.com/thread/2084644/new-mountain-stripe-2-4-players-only">this BoardGameGeek post</a></Info>
 				</OptionSelect>
 				<Link onClick={this.back}>Back</Link>
 			</Container>
@@ -166,7 +174,7 @@ class App extends React.Component<{}, State> {
 						onUndoAction={() => this.undo(index)}
 					/>
 				))}
-				<Button onClick={this.nextTurn}>End of Turn</Button>
+				{this.state.stripDeck.length > 0 && <Button onClick={this.nextTurn}>End of Turn</Button>}
 				<Link onClick={this.newGame}>New Game</Link>
 				<Link onClick={this.showSettings}>Settings</Link>
 			</Container>

@@ -15,8 +15,28 @@ interface State {
 
 const Container = styled.div`
 	position: relative;
+	width: 100%; 
 	${(props: { swiping: boolean }) => props.swiping ? '' : 'transition: all 0.5s' }
+	display: flex;
+	flex-direction: column;
 `
+
+const Left = styled.div`
+	width: ${MAX_DRAG_DISTANCE}px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: -${MAX_DRAG_DISTANCE}px;
+	height: 80px;
+`
+
+const Right = styled(Left)`
+	left: auto;
+	right: -${MAX_DRAG_DISTANCE}px;
+`
+
+
 
 export default class SwipeActions extends React.Component<Props, State> {
 	state = {
@@ -37,7 +57,13 @@ export default class SwipeActions extends React.Component<Props, State> {
 		return (
 			<Hammer onPan={this.handlePan} onPanEnd={this.handlePanEnd}>
 				<Container style={{ left: this.state.x + 'px' }} swiping={this.state.swiping}>
+					<Left>
+						Undo
+					</Left>
 					{this.props.children}
+					<Right>
+						Take
+					</Right>
 				</Container>
 			</Hammer>
 		)

@@ -2,6 +2,8 @@ import * as React from 'react';
 import Hammer from 'react-hammerjs'
 import styled from 'styled-components';
 
+const MAX_DRAG_DISTANCE = 100
+
 interface Props {
 	children: React.ReactNode
 }
@@ -23,7 +25,8 @@ export default class SwipeActions extends React.Component<Props, State> {
 	}
 
 	handlePan = (e: HammerInput) => {
-		this.setState({ x: e.deltaX, swiping: true })
+		const dragDistance = e.deltaX < 0 ? Math.max(e.deltaX, -MAX_DRAG_DISTANCE) : Math.min(e.deltaX, MAX_DRAG_DISTANCE)
+		this.setState({ x: dragDistance , swiping: true })
 	}
 
 	handlePanEnd = (e: HammerInput) => {

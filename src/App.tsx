@@ -1,13 +1,20 @@
 import * as React from 'react';
 import './App.css';
-import { MountainStrip } from './types';
+import { MountainStrip, NorwegianStrip } from './types';
 import MountainStripComponent from './MountainStrip';
 import createStripDeck from './createStripDeck';
 import styled from 'styled-components';
 
+enum View {
+	Main,
+	Settings
+}
+
 interface State {
 	stripDeck: MountainStrip[],
-	activeStrips: MountainStrip[]
+	activeStrips: MountainStrip[],
+	view: View,
+	settings: NorwegianStrip
 }
 
 const Container = styled.div`
@@ -19,26 +26,69 @@ const Container = styled.div`
 `
 
 const Button = styled.button`
-	display: flex;
 	margin: 15px;
+	margin-bottom: 300px;
 	padding: 15px;
+	width: 70%;
 	text-align: center;
-	background: green;
-	color: white;
+	background: rgb(197, 155, 100);
+	color: rgb(58, 22, 5);
+	outline: none;
+	border: none;
+	font-weight: bold;
+`
+
+const Link = styled.a`
+	color: #222222;
+`
+
+const Option = styled.div`
+	margin: 0 20px;
+	border: 1px solid black;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: calc(100% - 40px);
+	box-sizing: border-box;
+
+	${(props: { selected: boolean }) => props.selected && 'background: rgb(197, 155, 100);'}
+`
+
+const OptionSelect = styled.div`
+	margin-top: 30px;
+	margin-bottom: 50px;
 `
 
 class App extends React.Component<{}, State> {
 	public state: State = {
-		stripDeck: createStripDeck(),
-		activeStrips: []
+		stripDeck: [],
+		activeStrips: [],
+		view: View.Main,
+		settings: NorwegianStrip.DontUse
 	}
 	private newGame = () => {
-		const stripDeck = createStripDeck();
+		const stripDeck = createStripDeck(this.state.settings);
 		const [strip1, strip2, ...rest] = stripDeck
 		this.setState({
 			activeStrips: [strip1, strip2],
 			stripDeck: rest
 		})
+	}
+	componentDidUpdate() {
+		window.localStorage.setItem('state', JSON.stringify(this.state))
+	}
+	componentDidMount() {
+		const prevState = window.localStorage.getItem('state');
+		if (prevState) {
+			try {
+				const state = JSON.parse(prevState);
+				this.setState(state);
+			} catch (err) {
+				console.error(err)
+			}
+		}
 	}
 	take = (index: number) => {
 		const newTakenNumber = Math.min(this.state.activeStrips[index].layout.length, this.state.activeStrips[index].taken + 1)
@@ -80,21 +130,32 @@ class App extends React.Component<{}, State> {
 			stripDeck: this.state.stripDeck.slice(1)
 		})
 	}
-	componentDidUpdate() {
-		window.localStorage.setItem('state', JSON.stringify(this.state))
+	showSettings = () => {
+		this.setState({ view: View.Settings })
 	}
-	componentDidMount() {
-		const prevState = window.localStorage.getItem('state');
-		if (prevState) {
-			try {
-				const state = JSON.parse(prevState);
-				this.setState(state);
-			} catch (err) {
-				console.error(err)
-			}
-		}
+	back = () => {
+		this.setState({ view: View.Main })
+	}
+	setNorwegians = (settings: NorwegianStrip) => {
+		this.setState({ settings })
+	}
+	renderSettings = () => {
+		return (
+			<Container>
+				<OptionSelect>
+					<Option selected={this.state.settings === NorwegianStrip.DontUse} onClick={() => this.setNorwegians(NorwegianStrip.DontUse)}>Don't use Norwegians strip</Option>
+					<Option selected={this.state.settings === NorwegianStrip.Random} onClick={() => this.setNorwegians(NorwegianStrip.Random)}>Shuffle the Norwegians strip in</Option>
+					<Option selected={this.state.settings === NorwegianStrip.Last} onClick={() => this.setNorwegians(NorwegianStrip.Last)}>The Norwegians strip will always be the last one</Option>
+					<Option selected={this.state.settings === NorwegianStrip.RandomCustom} onClick={() => this.setNorwegians(NorwegianStrip.RandomCustom)}>Shuffle the custom Norwegians strip in as intended by the designer</Option>
+				</OptionSelect>
+				<Link onClick={this.back}>Back</Link>
+			</Container>
+		)
 	}
 	render() {
+		if (this.state.view === View.Settings) {
+			return this.renderSettings()
+		}
 		return (
 			<Container>
 				{this.state.activeStrips.map((strip, index) => (
@@ -106,7 +167,8 @@ class App extends React.Component<{}, State> {
 					/>
 				))}
 				<Button onClick={this.nextTurn}>End of Turn</Button>
-				<Button onClick={this.newGame}>New Game</Button>
+				<Link onClick={this.newGame}>New Game</Link>
+				<Link onClick={this.showSettings}>Settings</Link>
 			</Container>
 		)
 	}

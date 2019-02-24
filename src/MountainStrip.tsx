@@ -8,6 +8,7 @@ import ore from './images/ore.png';
 import silvers from './images/silvers.png';
 import silver from './images/silver.png';
 import strip from './images/strip.png';
+import ores from './images/ores.png';
 
 interface Props {
 	strip: MountainStrip,
@@ -27,6 +28,8 @@ function goodToImageSrc(good: Goods): string {
 			return silvers
 		case Goods.Silver:
 			return silver
+		case Goods.DoubleOre:
+			return ores;
 	}
 }
 

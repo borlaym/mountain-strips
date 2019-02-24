@@ -1,4 +1,4 @@
-import { MountainStrip, Goods } from "./types";
+import { MountainStrip, Goods, NorwegianStrip } from "./types";
 
 function shuffle<T>(array: T[]): T[] {
 	let currentIndex = array.length, temporaryValue, randomIndex;
@@ -19,6 +19,14 @@ function shuffle<T>(array: T[]): T[] {
 	return array;
 }
 
+function createNewStrip(layout: Goods[]): MountainStrip {
+	return {
+		layout,
+		taken: 0,
+		removed: false
+	}
+}
+
 const layouts = [
 	[Goods.Wood, Goods.Wood, Goods.Wood, Goods.Stone, Goods.Ore, Goods.Ore, Goods.DoubleSilver],
 	[Goods.Wood, Goods.Wood, Goods.Stone, Goods.Stone, Goods.Stone, Goods.Ore, Goods.DoubleSilver],
@@ -30,10 +38,24 @@ const layouts = [
 	[Goods.Wood, Goods.Wood, Goods.Stone, Goods.Ore, Goods.Ore, Goods.DoubleSilver, Goods.DoubleSilver]
 ]
 
-export default function createStripDeck(): MountainStrip[] {
-	return shuffle(layouts.map(layout => ({
-		layout,
-		taken: 0,
-		removed: false
-	})))
+const norwegianLayoutCustom =
+	[Goods.Wood, Goods.Wood, Goods.Stone, Goods.Stone, Goods.Ore, Goods.Silver, Goods.Silver, Goods.DoubleOre]
+
+const norwegianLayout =
+	[Goods.Wood, Goods.Wood, Goods.Stone, Goods.Stone, Goods.Ore, Goods.DoubleSilver, Goods.DoubleSilver, Goods.DoubleOre]
+
+
+
+export default function createStripDeck(config: NorwegianStrip): MountainStrip[] {
+	switch (config) {
+		case NorwegianStrip.DontUse:
+			return shuffle(layouts.map(createNewStrip))
+		case NorwegianStrip.Random:
+			return shuffle(layouts.concat([norwegianLayout]).map(createNewStrip))
+		case NorwegianStrip.Last:
+			return shuffle(layouts.map(createNewStrip)).concat(createNewStrip(norwegianLayout))
+		case NorwegianStrip.RandomCustom:
+			return shuffle(layouts.concat([norwegianLayoutCustom]).map(createNewStrip))
+	}
+	
 }

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mountain-strips/precache-manifest.33afd4730c5420d90a359ae6100c362e.js"
+  "/mountain-strips/precache-manifest.a0ee4ea37d6fe6cdef125ae3497a19d6.js"
 );
 
 workbox.clientsClaim();
